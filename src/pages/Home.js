@@ -13,11 +13,7 @@ const Home = () => {
   useEffect(() => {
     dispatch(movieAction.getMovies());
   }, []);
-  // loading이 true면 loading 스피너를 보여주고
-  // loading이 false면 데이터를 보여주고
 
-  // true : 데이터 도착 전
-  // false : 데이터 도착 후 or 에러가 났을 때
   if (loading) {
     return (
       <div className="loading">

@@ -31,7 +31,6 @@ function getMovies() {
           upComingApi,
           genreApi,
         ]);
-      console.log("genreList?", genreList);
 
       dispatch(
         movieActions.getMovies({
@@ -48,4 +47,28 @@ function getMovies() {
   };
 }
 
-export const movieAction = { getMovies };
+function getMoviesDetail(id) {
+  return async (dispatch) => {
+    try {
+      // 데이터 도착 전
+      dispatch(movieActions.handleLoding());
+
+      const movieDetailApi = api.get(
+        `/movie/${id}?api_key=${API_KEY}&language=en-US&page=1`
+      );
+
+      let [movieDetail] = await Promise.all([movieDetailApi]);
+
+      dispatch(
+        movieActions.getMoviesDetail({
+          movieDetail: movieDetail.data,
+        })
+      );
+    } catch (error) {
+      // 에러 핸들링 하는 곳
+      dispatch(movieActions.failMovies());
+    }
+  };
+}
+
+export const movieAction = { getMovies, getMoviesDetail };

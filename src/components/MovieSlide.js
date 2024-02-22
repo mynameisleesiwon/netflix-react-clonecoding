@@ -25,10 +25,10 @@ const responsive = {
 
 const MovieSlide = ({ movies }) => {
   return (
-    <div>
+    <div style={{ cursor: "pointer" }}>
       <Carousel responsive={responsive}>
         {movies.results.map((item) => (
-          <MovieCard item={item} />
+          <MovieCard key={item.id} item={item} />
         ))}
       </Carousel>
     </div>
